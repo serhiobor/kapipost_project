@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html> <!-- Используется html 5 версии -->
+<html lang="en"> <!-- Язык сайта - EN -->
+  <head>
+    <meta charset="utf-8"> <!-- Кодировка сайта -->
+    <!-- Сайт готов работать с мобильными устройствами -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Загружаем фав-иконки -->
+    <link rel="icon" href="img/fav/fav.ico" type="image">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/logo180.ico'%}">
+    <link rel="icon" type="image/ico" sizes="32x32" href="{% static 'img/fav/logo32.ico'%}">
+    <link rel="icon" type="image/ico" sizes="16x16" href="{% static 'img/fav/logo16.ico'%}">
+    <meta name="msapplication-TileColor" content="#000">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Подключен файл со стандартными стилями бустрап -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>
+      {% block title %}
+        title
+      {% endblock  %}
+    </title>
+  </head>
+  <body>
+    <header>
+      {% include 'includes/header.html' %}
+    </header>
+    <main>
+      {% block content %}
+        content
+      {% endblock  %}
+    </main>
+    <footer class="page-footer font-small blue border-top">
+      {% include 'includes/footer.html' %}
+    </footer>
+  </body>
+</html>

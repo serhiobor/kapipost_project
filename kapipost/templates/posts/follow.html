@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+  {{ title }}
+{% endblock %}
+{% block content %}
+  {% include 'posts/includes/switcher.html' %}
+  {% if posts_count %}
+    {% for post in page_obj %}
+    <div class="container py-5">
+      {% include 'posts/includes/post_card.html' %}
+      </div>
+      {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %}
+  {% else %}
+    <article>
+        <ul>
+          There are no selected authors yet
+        </ul>
+      </article>
+  {% endif %}
+  {% include 'includes/paginator.html' %}
+{% endblock %}

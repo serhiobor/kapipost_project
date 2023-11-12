@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}You're logged out{% endblock %}
+
+{% block content %}
+  {% with card_header='Logout' card_body='You are logged out, see you soon!' %}
+    {% include 'users/includes/card.html' %} 
+  {% endwith %}
+{% endblock %}
