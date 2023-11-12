@@ -16,6 +16,13 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -25,23 +32,29 @@ SECRET_KEY = ')p5ozxp%#is=l6b%s)bbxim2=c$+9wo_lm242#v#i!mos0(5!)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+    'testserver',
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'posts.apps.PostsConfig',
     'about.apps.AboutConfig',
-    'users.apps.UsersConfig',
     'core.apps.CoreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
     'django.contrib.staticfiles',
-]
+    'posts.apps.PostsConfig',
+    'sorl.thumbnail',
+    'users.apps.UsersConfig'
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,6 +67,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'kapipost.urls'
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'posts:index'
+LOGOUT_REDIRECT_URL = 'posts:index'
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
@@ -67,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_pocessor.year.year',
             ],
         },
     },
@@ -82,6 +99,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
 
@@ -123,5 +147,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
