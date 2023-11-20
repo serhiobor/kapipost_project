@@ -100,6 +100,11 @@ class PostFormTests(TestCase):
             second=2,
             msg="Post-creation form don't create post."
         )
+        self.assertEqual(
+            first=Post.objects.get(text='Test post 2').image.name,
+            second='posts/small.gif',
+            msg="Post-creation form don't upload image."
+        )
 
     def test_for_post_edit_form_get_correct_obgect(self) -> None:
         '''

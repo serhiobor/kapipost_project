@@ -10,7 +10,6 @@ class PostForm(ModelForm):
         self.fields['group'].required = False
         self.fields['group'].empty_label = 'Group is not chosen'
         self.fields['text'].required = True
-        self.fields['image'].required = False
 
     class Meta:
         model = Post

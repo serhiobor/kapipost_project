@@ -151,3 +151,8 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 vscode/
+
+# static and media
+static/
+kapipost/posts/static/
+kapipost/media/

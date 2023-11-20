@@ -16,7 +16,7 @@
             </button>                   
           </div>
           <div class="card-body">
-            <form method="post" enctype="multipart/form-data"
+            <form method="post" enctype="multipart/form-data" action="{% if is_edit %}{% url 'posts:post_edit' post.pk %}{% else %}{% url 'posts:post_create' %}{% endif %}"
               {% if action_url %}
                 action="{% url action_url %}"
               {% endif %}>        

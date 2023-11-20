@@ -102,18 +102,21 @@ def post_detail(request, post_id) -> HttpResponse:
 def post_create(request):
     '''Create a new post'''
     template = "posts/create_post.html"
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            username = request.user
-            post = form.save(commit=False)
-            post.author = username
-            form.save()
-            return redirect('posts:profile', username.username)
-    form = PostForm(request.POST or None)
-    context = {'form': form,
-               'is_edit': False,
-               'title': "New post"}
+    form = PostForm(
+        request.POST or None,
+        files=request.FILES or None
+    )
+    if form.is_valid():
+        post = form.save(commit=False)
+        username = request.user
+        post.author = username
+        form.save()
+        return redirect('posts:profile', username.username)
+    context = {
+        'form': form,
+        'is_edit': False,
+        'title': "New post"
+    }
     return render(request=request, template_name=template, context=context)
 
 
