@@ -6,6 +6,7 @@ User = get_user_model()
 
 class Group(models.Model):
     '''Group model'''
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique=False)
     description = models.TextField(blank=True)
@@ -16,6 +17,7 @@ class Group(models.Model):
 
 class Post(models.Model):
     '''Post model'''
+    id = models.AutoField(primary_key=True)
     text = models.TextField(blank=True,
                             verbose_name='Post text',
                             help_text='Enter the text')
@@ -49,6 +51,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     '''Comment model'''
+    id = models.AutoField(primary_key=True)
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
@@ -81,6 +84,8 @@ class Comment(models.Model):
 
 
 class Follow(models.Model):
+    '''Following model'''
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
