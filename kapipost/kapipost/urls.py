@@ -17,10 +17,11 @@ from django.urls import path, include
 
 
 urlpatterns = [
+    path('api/v1/', include('posts.urls', namespace='posts')),
     # endpoints for user management:
-    path('auth/', include('djoser.urls')),
+    path('api/v1/auth/', include('djoser.urls')),
     # JWT-endpoints:
-    path('auth/', include('djoser.urls.jwt'))
+    path('api/v1/auth/', include('djoser.urls.jwt'))
 ]
 
 
