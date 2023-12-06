@@ -27,6 +27,11 @@ urlpatterns = [
     path('auth/', include('users.urls', namespace='users')),
     path('auth/', include('django.contrib.auth.urls')),
     path('about/', include('about.urls', namespace='about')),
+    path('api/v1/', include('api.urls', namespace='api-posts')),
+    # endpoints for user management:
+    path('api/v1/auth/', include('djoser.urls')),
+    # JWT-endpoints:
+    path('api/v1/auth/', include('djoser.urls.jwt'))
 ]
 
 if settings.DEBUG:
